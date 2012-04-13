@@ -52,6 +52,7 @@ public class YetiHome extends JavaPlugin {
 		disableEssentials();
 		Settings.initialize(this);
 		Settings.loadSettings(new File(pluginDataPath + "config.yml"));
+		YetiHomeEconManager.initialize(this);
 		
 		this.homes.loadHomes();
 		this.cooldowns.loadCooldowns();
@@ -109,7 +110,6 @@ public class YetiHome extends JavaPlugin {
 		} else if (cmd.getName().equalsIgnoreCase("sethome")) {
 			if (!compliantHome(player.getLocation(), player.getName())) {
 				player.sendMessage(ChatColor.RED + "This area does not smell friendly");
-				return;
 			}
 			if (args.length == 0) {
 				this.commandExecutor.setDefaultHome(player);
@@ -141,7 +141,7 @@ public class YetiHome extends JavaPlugin {
 				} else {
 						Settings.sendMessageTooManyParameters(player);
 				}
-			} else if (cmd.getName().equalsIgnoreCase("listhomes")){
+			} else if (cmd.getName().compareToIgnoreCase("listhomes") == 0){
 
 				if (args.length == 0) {
 					this.commandExecutor.listHomes(player);

@@ -41,21 +41,23 @@ YetiHome:
         noPlayerMessage: 'Player {PLAYER} not found.'
         cooldownMessage: 'Your yeti powers have not recovered yet. Please wait another {SECONDS} seconds.'
         tooManyHomesMessage: 'You try to mark the area,but you have already marked {CURRENT} out of {MAX} areas.'
-        econNotEnoughFunds: 'You should possibly sell some fur. You lack{AMOUNT} to do that.'
+        homeListMessage: 'Home locations: {LIST}'
+        homeListOthersMessage: 'Home locations for {PLAYER}: {LIST}'
+        econNotEnoughFunds: 'You should possibly sell some fur. You lack {AMOUNT}TPs to do that.'
         econDeductedForHome: '{AMOUNT} was removed from your account for going home.'
-        econDeductForSet: '{AMOUNT} were paid to ensure your scent remains strong here'
+        econDeductForSet: '{AMOUNT}TPs were paid to ensure your scent remains strong here'
     default:
-        cooldown: 600
-        maxhomes: 2
+        cooldown: 0
+        maxhomes: -1
         setHomeCost: 0
-        setNamedHomeCost: 100
+        setNamedHomeCost: 0
         homeCost: 0
         namedHomeCost: 0
     groups:
         default:
-            cooldown: 600
-            maxhomes: 2
+            cooldown: 0
+            maxhomes: -1
             setHomeCost: 0
-            setNamedHomeCost: 100
+            setNamedHomeCost: 0
             homeCost: 0
             namedHomeCost: 0

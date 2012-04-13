@@ -25,7 +25,7 @@ public class YetiHomeEconManager {
 				economy = economyProvider.getProvider();
 				if (economy != null) {
 					handler = EconomyHandler.VAULT;
-					Messaging.logInfo("Economy system provided by: Vault v" + pVault.getDescription().getVersion() + " and " + economy.getName() + " v" + plugin.getServer().getPluginManager().getPlugin(economy.getName()).getDescription().getVersion() +"!", plugin);
+					Messaging.logInfo("Economy system provided by: Vault v" + pVault.getDescription().getVersion() + " and " + economy.getName() + "!", plugin);
 				} else {
 					handler = EconomyHandler.NONE;
 					Messaging.logWarning("An economy plugin wasn't detected!", plugin);

@@ -14,87 +14,115 @@ commands:
   deletehome:
     description: Deletes a named home location.
     usage: /<command> [<user>:]<location_name>
+  listhomes:
+    description: Lists all your home locations.
+    usage: /<command> [<user>]
+    
 permissions:
-    yetihome.*:
-        description: Gives access to all yetihome permissions.
-        default: false
-        children:
-            yetihome.defaulthome.*: true
-            yetihome.namedhome.*: true
-            yetihome.free.*: true
-            yetihome.ignore.*: true
-            yetihome.homeondeath: true
-    yetihome.defaulthome.*:
-        description: Gives access to all things involving the default /home.
-        default: false
-        children:
-            yetihome.defaulthome.go: true
-            yetihome.defaulthome.set: true
-            yetihome.defaulthome.delete: true
-    yetihome.defaulthome.go:
-        description: Allows the user to go to their default home.
-        default: false
-    yetihome.defaulthome.set:
-        description: Allows the user to set their default home.
-        default: false
-    yetihome.defaulthome.delete:
-        description: Allows the user to delete their default home.
-        default: false
-    yetihome.namedhome.*:
-        description: Allows the user full access to the use of named homes.
-        default: false
-        children:
-            yetihome.namedhome.go: true
-            yetihome.namedhome.set: true
-            yetihome.namedhome.delete: true
-    yetihome.namedhome.go:
-        description: Allows the user to go to their named home(s).
-        default: false
-    yetihome.namedhome.set:
-        description: Allows the user to set their named home(s).
-        default: false
-    yetihome.namedhome.delete:
-        description: Allows the user to delete their named home(s).
-        default: false
-    yetihome.free.*:
-        description: Allows the user to set/teleport to all homes they have access to for free.
-        default: false
-        children:
-            yetihome.free.defaulthome.*: true
-            yetihome.free.namedhome.*: true
-            yetihome.free.othershome.go: true
-    yetihome.free.defaulthome.*:
-        description: Allows the user to set/teleport to their default home for free.
-        default: false
-        children:
-            yetihome.free.defaulthome.go: true
-            yetihome.free.defaulthome.set: true
-    yetihome.free.defaulthome.go:
-        description: Allows the user to go to their default home for free.
-        default: false
-    yetihome.free.defaulthome.set:
-        description: Allows the user to set their default home for free.
-        default: false
-    yetihome.free.namedhome.*:
-        description: Allows the user to set/teleport to their default home for free.
-        default: false
-        children:
-            yetihome.free.namedhome.go: true
-            yetihome.free.namedhome.set: true
-    yetihome.free.namedhome.go:
-        description: Allows the user to go to their named homes for free.
-        default: false
-    yetihome.free.namedhome.set:
-        description: Allows the user to set their named homes for free.
-        default: false
-    yetihome.ignore.*:
-        description: Allows the user to ignore the cooldown timer.
-        default: false
-        children:
-            yetihome.ignore.cooldown: true
-    yetihome.ignore.cooldown:
-        description: Allows the user to ignore the cooldown timer.
-        default: false
-    yetihome.homeondeath:
-        description: The user will be taken to their default home when respawning.
-        default: false
+  yetihome.*:
+    description: Gives access to all yetihome permissions.
+    default: op
+    children:
+      yetihome.defaulthome.*: true
+      yetihome.namedhome.*: true
+      yetihome.free.*: true
+      yetihome.othershome.*: true
+      yetihome.ignore.*: true
+      yetihome.homeondeath: true
+  yetihome.defaulthome.*:
+    description: Gives access to all things involving the default /home.
+    default: false
+    children:
+      yetihome.defaulthome.go: true
+      yetihome.defaulthome.set: true
+      yetihome.defaulthome.delete: true
+  yetihome.defaulthome.go:
+    description: Allows the user to go to their default home.
+    default: false
+  yetihome.defaulthome.set:
+    description: Allows the user to set their default home.
+    default: false
+  yetihome.defaulthome.delete:
+    description: Allows the user to delete their default home.
+    default: false
+  yetihome.namedhome.*:
+    description: Allows the user full access to the use of named homes.
+    default: false
+    children:
+      yetihome.namedhome.go: true
+      yetihome.namedhome.set: true
+      yetihome.namedhome.list: true
+      yetihome.namedhome.delete: true
+  yetihome.namedhome.go:
+    description: Allows the user to go to their named home(s).
+    default: false
+  yetihome.namedhome.set:
+    description: Allows the user to set their named home(s).
+    default: false
+  yetihome.namedhome.delete:
+    description: Allows the user to delete their named home(s).
+    default: false
+  yetihome.namedhome.list:
+    description: Allows the user to list their named home(s).
+    default: false
+  yetihome.othershome.*:
+    description: Gives the user full access to other people's homes and home information. Administrative.
+    default: false
+    children:
+      yetihome.othershome.go: true
+      yetihome.othershome.set: true
+      yetihome.othershome.delete: true
+      yetihome.othershome.list: true
+  yetihome.othershome.go:
+    description: Allows the user to go to another person's home uninvited.
+    default: false
+  yetihome.othershome.set:
+    description: Allows the user to create another person's home.
+    default: false
+  yetihome.othershome.delete:
+    description: Allows the user to delete another person's home.
+    default: false
+  yetihome.othershome.list:
+    description: Allows the user to list another person's home.
+  yetihome.free.*:
+    description: Allows the user to set/teleport to all homes they have access to for free.
+    default: false
+    children:
+      yetihome.free.defaulthome.*: true
+      yetihome.free.namedhome.*: true
+      yetihome.free.othershome.go: true
+  yetihome.free.defaulthome.*:
+    description: Allows the user to set/teleport to their default home for free.
+    default: false
+    children:
+      yetihome.free.defaulthome.go: true
+      yetihome.free.defaulthome.set: true
+  yetihome.free.defaulthome.go:
+    description: Allows the user to go to their default home for free.
+    default: false
+  yetihome.free.defaulthome.set:
+    description: Allows the user to set their default home for free.
+    default: false
+  yetihome.free.namedhome.*:
+    description: Allows the user to set/teleport to their default home for free.
+    default: false
+    children:
+      yetihome.free.namedhome.go: true
+      yetihome.free.namedhome.set: true
+  yetihome.free.namedhome.go:
+    description: Allows the user to go to their named homes for free.
+    default: false
+  yetihome.free.namedhome.set:
+    description: Allows the user to set their named homes for free.
+    default: false
+  yetihome.ignore.*:
+    description: Allows the user to ignore the cooldown timer.
+    default: false
+    children:
+      yetihome.ignore.cooldown: true
+  yetihome.ignore.cooldown:
+    description: Allows the user to ignore the cooldown timer.
+    default: false
+  yetihome.homeondeath:
+    description: The user will be taken to their default home when respawning.
+    default: false

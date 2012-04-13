@@ -237,7 +237,7 @@ public class Settings {
     }
 
     public static void sendMessageDeductForSet(Player player, double amount) {
-    	String message = Config.getString("YetiHome.messages.econDeductedForSet", null);
+    	String message = Config.getString("YetiHome.messages.econDeductForSet", null);
     	if (message != null) {
     		Messaging.sendSuccess(player, message.replaceAll("\\{AMOUNT\\}", amount+""));
     	}
