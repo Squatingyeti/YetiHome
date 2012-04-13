@@ -1,6 +1,7 @@
 name: YetiHome
 version: 0.5
 main: net.yeticraft.squatingyeti.YetiHome.YetiHome
+softdepend: [Vault]
 description: >
              Yeticraft Homes.
 commands:

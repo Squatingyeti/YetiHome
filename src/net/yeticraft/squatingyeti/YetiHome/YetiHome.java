@@ -141,6 +141,15 @@ public class YetiHome extends JavaPlugin {
 				} else {
 						Settings.sendMessageTooManyParameters(player);
 				}
+			} else if (cmd.getName().equalsIgnoreCase("listhomes")){
+
+				if (args.length == 0) {
+					this.commandExecutor.listHomes(player);
+				} else if (args.length == 1) {
+					this.commandExecutor.listPlayerHomes(player, args[0]);
+				} else {
+					Settings.sendMessageTooManyParameters(player);
+				}
 			}
 		}
 	

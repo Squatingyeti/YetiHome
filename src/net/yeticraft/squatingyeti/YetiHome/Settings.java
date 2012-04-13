@@ -242,4 +242,20 @@ public class Settings {
     		Messaging.sendSuccess(player, message.replaceAll("\\{AMOUNT\\}", amount+""));
     	}
     }
+    
+    public static void sendMessageHomeList(CommandSender sender, String homeList) {
+    	String message = Config.getString("YetiHome.messages.homeListMessage", null);
+
+    	if (message != null) {
+    		Messaging.sendSuccess(sender, message.replaceAll("\\{LIST\\}", homeList));
+    	}
+    }
+    
+    public static void sendMessageOthersHomeList(CommandSender sender, String player, String homeList) {
+    	String message = Config.getString("YetiHome.messages.homeListOthersMessage", null);
+
+    	if (message != null) {
+    		Messaging.sendSuccess(sender, message.replaceAll("\\{PLAYER\\}", player).replaceAll("\\{LIST\\}", homeList));
+    	}
+    }
 }

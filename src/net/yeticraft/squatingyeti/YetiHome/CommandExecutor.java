@@ -1,5 +1,6 @@
 package net.yeticraft.squatingyeti.YetiHome;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.bukkit.Location;
@@ -79,12 +80,31 @@ public class CommandExecutor {
 		if (player.hasPermission("yetihome.namedhome.set")) {
 			int numHomes = plugin.homes.getUserHomeCount(player);
 			int maxHomes = Settings.getSettingMaxHomes(player);
+			double amount = 0;
 			
 			if (numHomes < maxHomes || plugin.homes.getHome(player, home) != null) {
+				
+				if (Settings.isEconomyEnabled() && !player.hasPermission("yetihome.free.namedhome.set")) {
+					if (!YetiHomeEconManager.hasEnough(player.getName(), Settings.getSetNamedHomeCost(player))) {
+							Settings.sendMessageNotEnoughMoney(player, Settings.getSetNamedHomeCost(player));
+							return;
+					} else {
+							amount = Settings.getSetNamedHomeCost(player);
+					}
+				}
+
+					//Double Check the charge before settings home
+					if (!player.hasPermission("yetihome.free.namedhome.set") && amount != 0) {
+					if (!YetiHomeEconManager.chargePlayer(player.getName(), amount)) {
+							return;
+					} else {
+							Settings.sendMessageDeductForHome(player, amount);
+					}
+				}
 			
-			plugin.homes.addHome(player, home, player.getLocation());
-			Settings.sendMessageHomeSet(player, home);
-			Messaging.logInfo("Player " + player.getName() + " set home location [" + home + "]", plugin);
+					plugin.homes.addHome(player, home, player.getLocation());
+					Settings.sendMessageHomeSet(player, home);
+					Messaging.logInfo("Player " + player.getName() + " set home location [" + home + "]", plugin);
 		} else {
 			Settings.sendMessageMaxHomes(player, numHomes, maxHomes);
 			Messaging.logInfo("Player " + player.getName() + " tried to set home location [" + home + "]. Player has too many already.", plugin);
@@ -159,6 +179,26 @@ public class CommandExecutor {
 			}
 		} else {
 			Messaging.logInfo("Player " + player.getName() + " tried to delete " + owner + "'s home location [" + home + "]. Permission not granted.", plugin);
+		}
+	}
+	
+	public void listHomes(Player player) {
+		if (player.hasPermission("yetihome.namedhome.list")) {
+			ArrayList<HomeLocation> homes = plugin.homes.listUserHomes(player);
+
+			Settings.sendMessageHomeList(player, Util.compileHomeList(homes));
+		} else {
+				Messaging.logInfo("Player " + player.getName() + " tried to list home locations. Permission denied.", plugin);
+		}
+	}
+	
+	public void listPlayerHomes(Player player, String owner) {
+		if (player.hasPermission("yetihome.othershome.list")) {
+				ArrayList<HomeLocation> homes = plugin.homes.listUserHomes(owner);
+
+				Settings.sendMessageOthersHomeList(player, owner, Util.compileHomeList(homes));
+		} else {
+				Messaging.logInfo("Player " + player.getName() + " tried to list " + owner + "'s home locations. Permission denied.", plugin);
 		}
 	}
 }
