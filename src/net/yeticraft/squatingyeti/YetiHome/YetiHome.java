@@ -90,6 +90,18 @@ public class YetiHome extends JavaPlugin {
 	}
 	
 	private void onCommandFromPlayer(Player player, Command cmd, String commandLabel, String[] args) {
+		if (cmd.getName().equalsIgnoreCase("homehelp")) {
+			player.sendMessage(ChatColor.YELLOW + "YetiHome Help");
+			player.sendMessage(ChatColor.RED + "/sethome: " + ChatColor.GRAY + " Sets your default home. MUST be in your faction zone.");
+			player.sendMessage(ChatColor.RED + "/sethome [name]: " + ChatColor.GRAY + " Sets a named home. MUST be in your faction zone.");
+			player.sendMessage(ChatColor.RED + "Setting a named home costs 100TPs");
+			player.sendMessage(ChatColor.RED + "/home: " + ChatColor.GRAY + " Go to your default home.");
+			player.sendMessage(ChatColor.RED + "/home [name]: " + ChatColor.GRAY + " Go to your named home.");
+			player.sendMessage(ChatColor.RED + "/listhomes: " + ChatColor.GRAY + " Lists your homes.");
+			player.sendMessage(ChatColor.RED + "/deletehome: " + ChatColor.GRAY + " Delete named home.");
+			return;
+		}
+		
 		if (cmd.getName().equalsIgnoreCase("home")) {
 			
 			if (args.length == 0) {

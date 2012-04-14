@@ -5,6 +5,9 @@ softdepend: [Vault]
 description: >
              Yeticraft Homes.
 commands:
+  homehelp:
+    description: Lists the help for YetiHome.
+    usage: /<command>
   home:
     description: Takes you back to your home location.
     usage: /<command> [[<user>:]location_name]
