@@ -39,7 +39,7 @@ YetiHome:
         noHomeMessage: '{HOME}? You know of no such place.'
         noDefaultHomeMessage: 'ForeverAlone without a home.'
         noPlayerMessage: 'Player {PLAYER} not found.'
-        cooldownMessage: 'Your yeti powers have not recovered yet. Please wait another {SECONDS} seconds.'
+        cooldownMessage: 'Your yeti powers have not recovered yet. Please wait another {MINUTES}m {SECONDS}s.'
         tooManyHomesMessage: 'You try to mark the area,but you have already marked {CURRENT} out of {MAX} areas.'
         homeListMessage: 'Home locations: {LIST}'
         homeListOthersMessage: 'Home locations for {PLAYER}: {LIST}'

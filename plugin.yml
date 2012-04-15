@@ -20,6 +20,9 @@ commands:
   listhomes:
     description: Lists all your home locations.
     usage: /<command> [<user>]
+  cooldown:
+    description: Gets the remaining time for your home cooldown.
+    usage: /<command>
     
 permissions:
   yetihome.*:
