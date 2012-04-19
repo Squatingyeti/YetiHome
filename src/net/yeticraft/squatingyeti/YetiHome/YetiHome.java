@@ -3,6 +3,7 @@ package net.yeticraft.squatingyeti.YetiHome;
 import static com.sk89q.worldguard.bukkit.BukkitUtil.toVector;
 
 import java.io.File;
+import java.util.Date;
 import java.util.List;
 
 import org.bukkit.ChatColor;
@@ -26,7 +27,7 @@ public class YetiHome extends JavaPlugin {
 	public HomeManager homes;
 	public CoolDownManager cooldowns;
 	public CommandExecutor commandExecutor;
-	
+	YetiHome plugin;
 	private YetiHomePlayerListener playerListener = new YetiHomePlayerListener(this);
 
 	@Override
@@ -52,6 +53,7 @@ public class YetiHome extends JavaPlugin {
 		disableEssentials();
 		Settings.initialize(this);
 		Settings.loadSettings(new File(pluginDataPath + "config.yml"));
+		YetiHomeEconManager.initialize(this);
 		
 		this.homes.loadHomes();
 		this.cooldowns.loadCooldowns();
@@ -89,6 +91,31 @@ public class YetiHome extends JavaPlugin {
 	}
 	
 	private void onCommandFromPlayer(Player player, Command cmd, String commandLabel, String[] args) {
+		if (cmd.getName().equalsIgnoreCase("homehelp")) {
+			player.sendMessage(ChatColor.YELLOW + "YetiHome Help");
+			player.sendMessage(ChatColor.RED + "/sethome: " + ChatColor.GRAY + " Sets your default home. MUST be in your faction zone.");
+			player.sendMessage(ChatColor.RED + "/sethome [name]: " + ChatColor.GRAY + " Sets a named home. MUST be in your faction zone."
+								+ ChatColor.RED + "Setting a named home costs 100TPs");
+			player.sendMessage(ChatColor.RED + "/home: " + ChatColor.GRAY + " Go to your default home.");
+			player.sendMessage(ChatColor.RED + "/home [name]: " + ChatColor.GRAY + " Go to your named home.");
+			player.sendMessage(ChatColor.RED + "/listhomes: " + ChatColor.GRAY + " Lists your homes.");
+			player.sendMessage(ChatColor.RED + "/cooldown: " + ChatColor.GRAY + " Gets your remaining cooldown time");
+			player.sendMessage(ChatColor.RED + "/deletehome: " + ChatColor.GRAY + " Delete named home.");
+			return;
+		}
+		if (cmd.getName().equalsIgnoreCase("cooldown")) {
+			
+			Date cooldown = cooldowns.getCooldown(player.getName());
+		
+		if (cooldown != null && !YetiPermissions.has(player, "yetihome.ignore.cooldown")) {
+			Settings.sendMessageCooldown(player, Math.max((int) (cooldown.getTime() - new Date().getTime()), 1000) / 1000);
+			return;
+		}
+		else {
+			player.sendMessage("Your power is strong now. You may return home at any time.");
+		}
+	}
+		
 		if (cmd.getName().equalsIgnoreCase("home")) {
 			
 			if (args.length == 0) {
@@ -109,7 +136,6 @@ public class YetiHome extends JavaPlugin {
 		} else if (cmd.getName().equalsIgnoreCase("sethome")) {
 			if (!compliantHome(player.getLocation(), player.getName())) {
 				player.sendMessage(ChatColor.RED + "This area does not smell friendly");
-				return;
 			}
 			if (args.length == 0) {
 				this.commandExecutor.setDefaultHome(player);
@@ -140,6 +166,15 @@ public class YetiHome extends JavaPlugin {
 					}
 				} else {
 						Settings.sendMessageTooManyParameters(player);
+				}
+			} else if (cmd.getName().compareToIgnoreCase("listhomes") == 0){
+
+				if (args.length == 0) {
+					this.commandExecutor.listHomes(player);
+				} else if (args.length == 1) {
+					this.commandExecutor.listPlayerHomes(player, args[0]);
+				} else {
+					Settings.sendMessageTooManyParameters(player);
 				}
 			}
 		}

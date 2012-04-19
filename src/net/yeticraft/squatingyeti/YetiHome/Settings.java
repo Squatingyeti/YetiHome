@@ -183,12 +183,27 @@ public class Settings {
     	}
     }
 
-    public static void sendMessageCooldown(CommandSender sender, int timeLeft) {
+   /* public static void sendMessageCooldown(CommandSender sender, int timeLeft) {
     	String message = Config.getString("YetiHome.messages.cooldownMessage", null);
 
     	if (message != null) {
     		Messaging.sendError(sender, message.replaceAll("\\{SECONDS\\}", Integer.toString(timeLeft)));
     	}
+    }*/
+    
+    public static void sendMessageCooldown(CommandSender sender, int timeLeft) {
+        String message = Config.getString("YetiHome.messages.cooldownMessage", null);
+ 
+        if (message != null) {
+               
+                int minutesLeftInCooldown = timeLeft / 60;
+                        int remainderSeconds = timeLeft % 60;
+               
+                        String msg = message.replaceAll("\\{MINUTES\\}", Integer.toString(minutesLeftInCooldown));
+                msg = msg.replaceAll("\\{SECONDS\\}", Integer.toString(remainderSeconds));
+               
+                Messaging.sendError(sender, msg);
+        }
     }
 
     public static void sendMessageMaxHomes(CommandSender sender, int currentHomes, int maxHomes) {
@@ -237,9 +252,25 @@ public class Settings {
     }
 
     public static void sendMessageDeductForSet(Player player, double amount) {
-    	String message = Config.getString("YetiHome.messages.econDeductedForSet", null);
+    	String message = Config.getString("YetiHome.messages.econDeductForSet", null);
     	if (message != null) {
     		Messaging.sendSuccess(player, message.replaceAll("\\{AMOUNT\\}", amount+""));
+    	}
+    }
+    
+    public static void sendMessageHomeList(CommandSender sender, String homeList) {
+    	String message = Config.getString("YetiHome.messages.homeListMessage", null);
+
+    	if (message != null) {
+    		Messaging.sendSuccess(sender, message.replaceAll("\\{LIST\\}", homeList));
+    	}
+    }
+    
+    public static void sendMessageOthersHomeList(CommandSender sender, String player, String homeList) {
+    	String message = Config.getString("YetiHome.messages.homeListOthersMessage", null);
+
+    	if (message != null) {
+    		Messaging.sendSuccess(sender, message.replaceAll("\\{PLAYER\\}", player).replaceAll("\\{LIST\\}", homeList));
     	}
     }
 }

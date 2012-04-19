@@ -231,6 +231,28 @@ YetiHome plugin;
 			return 0;
 		}
 	}
+	
+	/**
+	* Retrieve a list of player home locations from the database. If player not found, returns a blank list.
+	* @param player Player to retrieve home list for.
+	* @return ArrayList<HomeLocation> List of home locations.
+	*/
+	public ArrayList<HomeLocation> listUserHomes(Player player) {
+	return this.listUserHomes(player.getName().toLowerCase());
+	}
+
+	/**
+	* Retrieve a list of player home locations from the database. If player not found, returns a blank list.
+	* @param player Player to retrieve home list for.
+	* @return ArrayList<HomeLocation> List of home locations.
+	*/
+	public ArrayList<HomeLocation> listUserHomes(String player) {
+	if (this.homeLocations.containsKey(player.toLowerCase())) {
+		return this.homeLocations.get(player.toLowerCase());
+	} else {
+		return new ArrayList<HomeLocation>();
+	}
+	}
 
 	/**
 	 * Save homes list to file. Clears the saveRequired flag.

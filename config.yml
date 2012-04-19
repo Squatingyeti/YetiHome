@@ -36,18 +36,19 @@ YetiHome:
         cannotDeleteDefaultHomeMessage: 'A yeti always needs a home.'
         homeSetMessage: 'Now the {HOME} smells like your land as well'
         homeDeletedMessage: 'The {HOME} no longer seems inviting.'
-        noHomeMessage: 'Home {HOME} not set.'
-        noDefaultHomeMessage: 'Home not set.'
+        noHomeMessage: '{HOME}? You know of no such place.'
+        noDefaultHomeMessage: 'ForeverAlone without a home.'
         noPlayerMessage: 'Player {PLAYER} not found.'
-        cooldownMessage: 'You may not teleport yet. Please wait another {SECONDS} seconds.'
-        tooManyHomesMessage: 'Cannot set home location. You have already set {CURRENT} out of {MAX} homes.'
-        econNotEnoughFunds: 'You did not have {AMOUNT} to do that.'
+        cooldownMessage: 'Your yeti powers have not recovered yet. Please wait another {MINUTES}m {SECONDS}s.'
+        tooManyHomesMessage: 'You try to mark the area,but you have already marked {CURRENT} out of {MAX} areas.'
+        homeListMessage: 'Home locations: {LIST}'
+        homeListOthersMessage: 'Home locations for {PLAYER}: {LIST}'
+        econNotEnoughFunds: 'You should possibly sell some fur. You lack {AMOUNT}TPs to do that.'
         econDeductedForHome: '{AMOUNT} was removed from your account for going home.'
-        econDeductForSet: '{AMOUNT} was removed from your account for setting a home.'
-        econNotEnoughFunds: 'You did not have {AMOUNT} to do that.'
+        econDeductForSet: '{AMOUNT}TPs were paid to ensure your scent remains strong here'
     default:
         cooldown: 0
-        maxhomes: 2
+        maxhomes: -1
         setHomeCost: 0
         setNamedHomeCost: 0
         homeCost: 0
@@ -55,7 +56,7 @@ YetiHome:
     groups:
         default:
             cooldown: 0
-            maxhomes: 2
+            maxhomes: -1
             setHomeCost: 0
             setNamedHomeCost: 0
             homeCost: 0
