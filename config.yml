@@ -29,7 +29,7 @@ YetiHome:
     enableHomeOnDeath: false
     permissiveGroupHandling: true
     enableEconomy: false
-    loadChunks: false
+    loadChunks: true
     messages:
         tooManyParameters: 'Too many parameters.'
         defaultHomeSetMessage: 'You marked this area with your scent.'

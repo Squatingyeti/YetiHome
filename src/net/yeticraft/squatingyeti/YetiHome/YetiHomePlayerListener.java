@@ -27,7 +27,7 @@ public class YetiHomePlayerListener implements Listener {
 			}
 		}
 	}
-   /* @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerTeleport(PlayerTeleportEvent event) {
         if (Settings.loadChunks() == true) {
             World world = event.getPlayer().getWorld();
@@ -36,5 +36,5 @@ public class YetiHomePlayerListener implements Listener {
             int z = chunk.getZ();
             world.refreshChunk(x, z);
         }
-    } */
+    } 
 }

@@ -116,6 +116,10 @@ public class Settings {
     public static boolean isEconomyEnabled() {
     	return Config.getBoolean("YetiHome.enableEconomy", false);
     }
+    
+    public static boolean loadChunks() {
+    	return Config.getBoolean("YetiHome.loadchunks", false);
+    }
 
     public static boolean isPermissiveGroupHandlingEnabled() {
     	return Config.getBoolean("YetiHome.permissiveGroupHandling", true);
@@ -135,10 +139,6 @@ public class Settings {
 
     public static int getNamedHomeCost(Player player) {
     	return getSettingInt(player, "namedHomeCost", 0, !permissiveGroupHandling, false);
-    }
-
-    public static int getOthersHomeCost(Player player) {
-    	return getSettingInt(player, "othersHomeCost", 0, !permissiveGroupHandling, false);
     }
 
     public static int getSettingCooldown(Player player) {
